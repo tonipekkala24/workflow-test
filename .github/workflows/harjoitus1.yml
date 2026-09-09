@@ -1,0 +1,27 @@
+name: Manuaalinen ja Issue-käynnistys sekä tiedoston luonti
+on:
+  workflow_dispatch:
+  issues:
+    types: [opened]
+jobs:
+  files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: filecreation
+        run: |
+          echo "Tekstiä" > info.txt
+      - name: backup
+        run: |
+          mkdir backup
+          cp info.txt backup/
+      - name: contents
+        run: |
+          ls -la
+          ls -la backup
+          cat info.txt
+  yesno:
+    runs-on: ubuntu-latest
+    steps:
+      - name: fetch-api
+        run: |
+          curl -s https://yesno.wtf/api
