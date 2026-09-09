@@ -8,7 +8,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
-
+          fetch-tags: true
       - name: Luo commits.text
         run: |
           git log --oneline > commits.txt
@@ -17,6 +17,7 @@ jobs:
           cat commits.txt
       - name: Siirry tagiin v1.0.0
         run: |
+          git tag
           git checkout v1.0.0
           cat README.md
         
