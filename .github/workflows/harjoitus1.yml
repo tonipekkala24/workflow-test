@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: filecreation
         run: |
+          touch info.txt
           echo "Tekstiä" > info.txt
       - name: backup
         run: |
