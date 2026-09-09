@@ -15,9 +15,9 @@ jobs:
       - name: Tulosta commits.txt sisältö
         run: |
           cat commits.txt
-      - name: Siirry tagiin v1.0.0
+      - name: Siirry tagiin v1.0.1
         run: |
           git tag
-          git checkout v1.0.0
+          git checkout v1.0.1
           cat README.md
         
