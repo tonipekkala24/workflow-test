@@ -1,0 +1,22 @@
+name: Repo Info
+on: workflow_dispatch
+jobs:
+  git-vaiheet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hae reposta kaikki koodit ja historia
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Luo commits.text
+        run: |
+          git log --oneline > commits.txt
+      - name: Tulosta commits.txt sisältö
+        run: |
+          cat commits.txt
+      - name: Siirry tagiin v1.0.0
+        run: |
+          git checkout v1.0.0
+          cat README.md
+        
