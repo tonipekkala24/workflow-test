@@ -1,4 +1,4 @@
-name: Manuaalinen ja Issue-käynnistys sekä tiedoston luonti
+name: Repo testi
 on:  workflow_dispatch
 jobs:
   repo-test:
