@@ -2,12 +2,13 @@ name: Issue workflow
 
 on:
   issues:
-    types: opened
+    types: [opened]
 
-  issue_comment: 
-    types: created
+  issue_comment:
+    types: [created]
+
 jobs:
-  print-issue-info:
+  issue-info:
     runs-on: ubuntu-latest
 
     permissions:
@@ -20,28 +21,29 @@ jobs:
       - name: Show payload
         run: |
           echo '${{ toJson(github.event) }}'
-      
+
       - name: Handle new issue
-        if: GITHUB.EVENT_NAME == 'issues'
+        if: github.event_name == 'issues'
         run: |
           echo "Issue title: ${{ github.event.issue.title }}"
           echo "Assignee: ${{ github.event.issue.assignee.login }}"
-          
+
       - name: Add issue to README
-        if: GITHUB.EVENT_NAME == 'issues'
+        if: github.event_name == 'issues'
         run: |
           echo "- ${{ github.event.issue.title }} - ${{ github.event.issue.assignee.login }}" >> README.md
 
-      - name: Commit
+      - name: Commit README changes
+        if: github.event_name == 'issues'
         run: |
-          git config user.name "tonipekkala24"
-          git config user.email "tpekkala24@students.oamk.fi"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
           git commit -m "Add new issue to README"
           git push
-          
+
       - name: Handle issue comment
-        if: GITHUB.EVENT_NAME == 'issue_comment'
+        if: github.event_name == 'issue_comment'
         run: |
           echo "Comment: ${{ github.event.comment.body }}"
           echo "Comment author: ${{ github.event.comment.user.login }}"
