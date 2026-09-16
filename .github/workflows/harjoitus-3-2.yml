@@ -12,13 +12,16 @@ jobs:
     permissions:
       contents: write
 
+    env:
+      KEYWORD: Toninlogi
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Append to log file
         run: |
-          echo "Push implemented yay" >> log.txt
+          echo "$KEYWORD: Push implemented" >> log.txt
 
       - name: Commit and push changes
         run: |
