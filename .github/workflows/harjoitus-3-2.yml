@@ -18,7 +18,7 @@ jobs:
 
       - name: Append to log file
         run: |
-          echo "Push implemented" >> log.txt
+          echo "Push implemented yay" >> log.txt
 
       - name: Commit and push changes
         run: |
