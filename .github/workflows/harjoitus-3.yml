@@ -1,0 +1,19 @@
+name: Print enviroment variables
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  APP_NAME: MathCounter
+  APP_VERSION: v1.0.2
+
+jobs:
+  display-vars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print app info
+        run: |
+          echo "Your app name is $APP_NAME and version is $APP_VERSION"
