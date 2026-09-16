@@ -2,8 +2,10 @@ name: Issue workflow
 
 on:
   issues:
-    types: [opened]
+    types: opened
 
+  issue_comment: 
+    types: created
 jobs:
   print-issue-info:
     runs-on: ubuntu-latest
@@ -12,13 +14,21 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v7
-      - name: Print issue title and assignee
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show payload
+        run: |
+          echo '${{ toJson(github.event) }}'
+      
+      - name: Handle new issue
+        if: github.event_name == 'issues'
         run: |
           echo "Issue title: ${{ github.event.issue.title }}"
           echo "Assignee: ${{ github.event.issue.assignee.login }}"
           
       - name: Add issue to README
+        if: github.event_name == 'issues'
         run: |
           echo "- ${{ github.event.issue.title }} - ${{ github.event.issue.assignee.login }}" >> README.md
 
@@ -29,3 +39,9 @@ jobs:
           git add README.md
           git commit -m "Add new issue to README"
           git push
+          
+      - name: Handle issue comment
+        if: github.event_name == 'issue_comment'
+        run: |
+          echo "Comment: ${{ github.event.comment.body }}"
+          echo "Comment author: ${{ github.event.comment.user.login }}"
