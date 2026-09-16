@@ -1,0 +1,32 @@
+name: Log push events
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  log-event:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@4
+
+      - name: Append to log file
+        run: |
+          echo "Push implemented" >> log.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@://github.com"
+          
+          git add log.txt
+          
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: update log.txt [skip ci]"
+          
+          git push
