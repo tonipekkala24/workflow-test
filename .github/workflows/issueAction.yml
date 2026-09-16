@@ -41,7 +41,6 @@ jobs:
           git push
           
       - name: Handle issue comment
-        if: github.event_name == 'issue_comment'
         run: |
           echo "Comment: ${{ github.event.comment.body }}"
           echo "Comment author: ${{ github.event.comment.user.login }}"
