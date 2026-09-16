@@ -22,13 +22,13 @@ jobs:
           echo '${{ toJson(github.event) }}'
       
       - name: Handle new issue
-        if: github.event_name == 'issues'
+        if: GITHUB.EVENT_NAME == 'issues'
         run: |
           echo "Issue title: ${{ github.event.issue.title }}"
           echo "Assignee: ${{ github.event.issue.assignee.login }}"
           
       - name: Add issue to README
-        if: github.event_name == 'issues'
+        if: GITHUB.EVENT_NAME == 'issues'
         run: |
           echo "- ${{ github.event.issue.title }} - ${{ github.event.issue.assignee.login }}" >> README.md
 
@@ -41,7 +41,7 @@ jobs:
           git push
           
       - name: Handle issue comment
-        if: github.event_name == 'issue_comment'
+        if: GITHUB.EVENT_NAME == 'issue_comment'
         run: |
           echo "Comment: ${{ github.event.comment.body }}"
           echo "Comment author: ${{ github.event.comment.user.login }}"
