@@ -42,9 +42,6 @@ jobs:
           
       - name: Handle issue comment
         if: github.event_name == 'issue_comment'
-        env:
-          COMMENT: ${{ github.event.comment.body }}
-          AUTHOR: ${{ github.event.comment.user.login }}
         run: |
-          echo "Comment: $COMMENT"
-          echo "Comment author: $AUTHOR"
+          echo "Comment: ${{ github.event.comment.body }}"
+          echo "Comment author: ${{ github.event.comment.user.login }}"
