@@ -1,0 +1,15 @@
+name: Issue workflow
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  print-issue-info:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print issue title and assignee
+        run: |
+          echo "Issue title: ${{ github.event.issue.title }}"
+          echo "Assignee: ${{ github.event.issue.assignee.login }}"
