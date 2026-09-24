@@ -1,0 +1,22 @@
+name: Job harjoitus 1.1
+
+on: workflow_dispatch
+
+jobs:
+  age-print:
+    needs: lname-print
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo '22'
+  fname-print:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Toni'
+  lname-print:
+    needs: fname-print
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Pekkala'
+    
+    
+  
